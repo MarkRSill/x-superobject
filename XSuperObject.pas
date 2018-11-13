@@ -30,7 +30,19 @@ unit XSuperObject;
 
 interface
 
-{$I XSuperObject.inc}
+(*
+* Marshalling Options
+*)
+{$DEFINE SP_DATASET}
+{$DEFINE SP_STREAM}
+
+// ** Zero Based Strings Definations...
+{$UNDEF XE2UP}
+{$IFDEF DCC}
+  {$IF CompilerVersion >= 24}
+   {$DEFINE XE2UP}
+  {$ENDIF}
+{$ENDIF}
 
 uses
   Classes,
@@ -2427,8 +2439,9 @@ begin
   // Handle TGUID
   if (RType = TypeInfo(TGUID)) then
   begin
-    if IJSONData.Ancestor[Member].DataType <> dtNull then
-      SetValue(Data, MemberValue, Member, TValue.From(StringToGuid(IJSONData.Ancestor[Member].AsVariant)))
+    Ancestor := IJSONData.Ancestor[Member];
+    if Ancestor.DataType <> dtNull then
+      SetValue<Typ>(Data, MemberValue, Member, TValue.From(StringToGuid(Ancestor.AsVariant)))
   end
   else
   // End TGUID
@@ -2456,7 +2469,6 @@ begin
           TValue.Make(IJSONData.I[Member], GetMemberTypeInfo(MemberValue), SubVal );
           SetValue<Typ>(Data, MemberValue, Member, SubVal);
        end;
-
 
     tkFloat:
        SetValue<Typ>(Data, MemberValue, Member, IJsonData.F[Member]);
