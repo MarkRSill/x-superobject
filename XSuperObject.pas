@@ -1551,7 +1551,7 @@ var
 begin
   S := TStringStream.Create( AsJSON(Ident, UniversalTime) );
   try
-     S.SaveToStream(S);
+     S.SaveToStream(Stream);
   finally
      S.Free;
   end;
@@ -2424,6 +2424,14 @@ begin
        SetValue<Typ>(Data, MemberValue, Member, TValue.From<TDateTime>(Ancestor.AsVariant))
   end
   else
+  // Handle TGUID
+  if (RType = TypeInfo(TGUID)) then
+  begin
+    if IJSONData.Ancestor[Member].DataType <> dtNull then
+      SetValue(Data, MemberValue, Member, TValue.From(StringToGuid(IJSONData.Ancestor[Member].AsVariant)))
+  end
+  else
+  // End TGUID
   case RType.Kind of
     tkInteger:
        SetValue<Typ>(Data, MemberValue, Member, Integer(IJSonData.I[Member]));
