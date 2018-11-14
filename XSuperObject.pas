@@ -30,20 +30,6 @@ unit XSuperObject;
 
 interface
 
-(*
-* Marshalling Options
-*)
-{$DEFINE SP_DATASET}
-{$DEFINE SP_STREAM}
-
-// ** Zero Based Strings Definations...
-{$UNDEF XE2UP}
-{$IFDEF DCC}
-  {$IF CompilerVersion >= 24}
-   {$DEFINE XE2UP}
-  {$ENDIF}
-{$ENDIF}
-
 uses
   Classes,
   Variants,
@@ -62,11 +48,12 @@ uses
   {$ENDIF}
   ;
 
-{$IFDEF XE2UP}
-  const CharIndex = Low(String);
-{$ELSE}
-  const CharIndex = 1;
-{$ENDIF}
+const
+  CharIndex = 1;
+const
+  PROPSLOT_MASK    = $FF000000;
+  PROPSLOT_FIELD   = $FF000000;
+  PROPSLOT_VIRTUAL = $FE000000;
 
 type
 

@@ -2141,16 +2141,16 @@ begin
 end;
 
 class destructor TJSONDateManager.Destroy;
-{$IF CompilerVersion < 29}
+{.$IF CompilerVersion < 29}
 var
   I: Integer;
-{$ENDIF}
+{.$ENDIF}
 begin
   if Assigned(FFormats) then begin
-    {$IF CompilerVersion < 29}
+    {.$IF CompilerVersion < 29}
     for I := 0 to FFormats.Count - 1 do
-        FFormats.List[I]._Release;
-    {$ENDIF}
+        FFormats.Items[I]._Release; // List[I]._Release;
+    {.$ENDIF}
     FFormats.Free;
   end;
 end;
