@@ -2441,7 +2441,7 @@ begin
   begin
     Ancestor := IJSONData.Ancestor[Member];
     if Ancestor.DataType <> dtNull then
-      SetValue<Typ>(Data, MemberValue, Member, TValue.From(StringToGuid(Ancestor.AsVariant)))
+      SetValue<Typ>(Data, MemberValue, Member, TValue.From<TGUID>(StringToGuid(Ancestor.AsVariant)))
   end
   else
   // End TGUID
