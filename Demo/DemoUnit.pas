@@ -140,73 +140,15 @@ begin
 end;
 
 procedure TForm2.Button2Click(Sender: TObject);
-var
-  Parse: TTestRec; // For Record;
-  S: String;
+//var
+//  Parse: TTestRec; // For Record;
+//  S: String;
 begin
-  Parse := TJSON.Parse<TTestRec>('{"A": 1, "B": 0, "C": true, "D": "Hello", "E":{"A": 3, "B": "Delphi"}, "F": {"A": 4, "B": 5}, "G": [0,2], "H": "2014-05-03T03:25:05.059", "J": "2014-05-03", "K": "03:25:05", "L":[{"A": 4, "B": 5},{"A": 6, "B": 7}]}');
-  S := TJSON.Stringify<TTestRec>(Parse);
-
-  Memo1.Lines.Text := S;
+//  Parse := TJSON.Parse<TTestRec>('{"A": 1, "B": 0, "C": true, "D": "Hello", "E":{"A": 3, "B": "Delphi"}, "F": {"A": 4, "B": 5}, "G": [0,2], "H": "2014-05-03T03:25:05.059", "J": "2014-05-03", "K": "03:25:05", "L":[{"A": 4, "B": 5},{"A": 6, "B": 7}]}');
+//  S := TJSON.Stringify<TTestRec>(Parse);
+//
+//  Memo1.Lines.Text := S;
 end;
 
 end.
-
-
-
-
-
-
-
-
-
-
-
-
-
-    uses
-      XSuperJSON, XSuperObject;
-
-    type
-      TSubClass = class
-        A: Integer;
-        B: Integer;
-      end;
-
-      TMyClass = class
-      private
-        FField: Integer;
-        FSampler: TDateTime;
-        FSubClass: TSubClass;
-      published
-        property field: Integer read FField write FField;
-        property sampler: TDateTime read FSampler write FSampler;
-        property subClass: TSubClass read FSubClass write FSubClass;
-      end;
-
-    procedure TForm2.Button3Click(Sender: TObject);
-    var
-      MyClass: TMyClass;
-      S: string;
-    begin
-      Memo1.Lines.Clear;
-
-      MyClass := TMyClass.FromJSON('{"field":12}'); //,"subClass":{"A":208,"B":39}}');
-      if MyClass.field = 12 then
-        Memo1.Lines.Add('MyClass.field has the correct value of 12');
-      if Assigned(MyClass.subClass) and (MyClass.subClass.A = 208) then
-        Memo1.Lines.Add('MyClass.subClass.A has the correct value of 208');
-
-      S := MyClass.AsJSON;
-      Memo1.Lines.Add(S);
-
-      if not Assigned(MyClass.subClass) then
-        MyClass.subClass := TSubClass.Create;
-      MyClass.subClass.A := 345;
-      MyClass.subClass.B := 1024;
-      MyClass.sampler := now;
-
-      S := MyClass.AsJSON;
-      Memo1.Lines.Add(S);
-    end;
 
