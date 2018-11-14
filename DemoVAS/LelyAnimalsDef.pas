@@ -83,7 +83,7 @@ type
 
   TLelyDataClass = class
   private
-    FAnimals: TArray<TAnimalsClass>;
+    FAnimals: TList<TAnimalsClass>;
   public
     destructor Destroy; override;
 
@@ -91,7 +91,7 @@ type
 
     class function FromJsonFile(const AFileName: string): TLelyDataClass;
 
-    property Animals: TArray<TAnimalsClass> read FAnimals write FAnimals;
+    property Animals: TList<TAnimalsClass> read FAnimals write FAnimals;
   end;
 
 implementation

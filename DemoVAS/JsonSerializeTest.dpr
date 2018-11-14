@@ -4,7 +4,6 @@ uses
   Vcl.Forms,
   JsonSerializeTesting in 'JsonSerializeTesting.pas' {Form3},
   jfUtils in 'jfUtils.pas',
-  DateUtilsEx in 'DateUtilsEx.pas',
   SMBJsonEntitiesSO in 'SMBJsonEntitiesSO.pas',
   LelyAnimalsDef in 'LelyAnimalsDef.pas';
 

@@ -119,7 +119,7 @@ begin
   entitiesCount := 0;
   jv := GetSuperObjectAnimals;
   if Assigned(jv.Animals) then
-    entitiesCount := Length(jv.Animals);
+    entitiesCount := jv.Animals.Count;
   try
     Timer.Stop;
     TThread.Synchronize(nil, procedure begin
@@ -131,7 +131,7 @@ begin
     totalActive := 0;
     totalHighActive := 0;
     if entitiesCount > 0 then begin
-      for entitiesCount := 0 to Length(jv.Animals) - 1 do
+      for entitiesCount := 0 to jv.Animals.Count - 1 do
       begin
         active := Trunc(StrToIntDef(jv.Animals[entitiesCount].ID, 0));
         Inc(totalActive, active);
